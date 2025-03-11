@@ -8,6 +8,7 @@ export function handleSearch(
 ) {
   const searchedWord = e.target.value.toLowerCase();
 
+  // Filtering on title, tags and ingredients
   const filteredData = data.filter((dish: dish) => {
     const matchedTitle = dish.title.toLowerCase().includes(searchedWord);
 
