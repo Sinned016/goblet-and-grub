@@ -9,16 +9,19 @@ export default async function DishPage({ params }: { params: { id: string } }) {
   const queryString = print(GET_DISH);
 
   // Change localhost:3000 to the actual route of my page later during prod.
-  const response = await fetch(`http://localhost:3000/api/graphql`, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      query: queryString,
-      variables: { id },
-    }),
-  });
+  const response = await fetch(
+    `${process.env.NEXT_PUBLIC_API_URL}/api/graphql`,
+    {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        query: queryString,
+        variables: { id },
+      }),
+    }
+  );
 
   const { data, errors } = await response.json();
   const dish: dish = data.dish;
