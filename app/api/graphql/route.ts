@@ -22,13 +22,6 @@ interface QueryDish {
   tags: string[];
   title: string;
 }
-interface QueryRecipe {
-  id: string;
-  dishId: string;
-  ingredients: string[];
-  instructions: string;
-  recipeAuthorId: string;
-}
 
 const resolvers = {
   Query: {
