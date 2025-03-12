@@ -10,14 +10,24 @@ export const GET_DISHES = gql`
       recipe {
         ingredients
         information
-        instructions
       }
     }
   }
 `;
 
+export interface dishes {
+  id: string;
+  title: string;
+  tags: string[];
+  image: string;
+  recipe: {
+    ingredients: string[];
+    information: string;
+  };
+}
+
 export const GET_DISH = gql`
-  query getDish($id: String!) {
+  query getDish($id: ID!) {
     dish(id: $id) {
       id
       title
@@ -40,9 +50,11 @@ export interface dish {
   title: string;
   tags: string[];
   image: string;
+  createdAt: string;
   recipe: {
     ingredients: string[];
     information: string;
     instructions: string;
+    recipeAuthor: string;
   };
 }

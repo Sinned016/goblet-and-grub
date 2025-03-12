@@ -23,7 +23,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body className={`font-serif antialiased`}>
-        <div className="bg-homepage bg-cover bg-center bg-fixed min-h-screen">
+        <div className="bg-homepage bg-cover bg-center bg-fixed min-h-screen p-4 xl:p-0 xl:pb-12">
           <HomeNav />
           <ApolloProviderWrapper>{children}</ApolloProviderWrapper>
         </div>

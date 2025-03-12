@@ -1,15 +1,15 @@
-import { dish } from "@/lib/queries";
+import { dish, dishes } from "@/lib/queries";
 import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 export function handleSearch(
   e: ChangeEvent<HTMLInputElement>,
-  data: dish[],
-  setSearch: Dispatch<SetStateAction<dish[]>>
+  data: dishes[],
+  setSearch: Dispatch<SetStateAction<dishes[]>>
 ) {
   const searchedWord = e.target.value.toLowerCase();
 
   // Filtering on title, tags and ingredients
-  const filteredData = data.filter((dish: dish) => {
+  const filteredData = data.filter((dish: dishes) => {
     const matchedTitle = dish.title.toLowerCase().includes(searchedWord);
 
     const matchedTags = dish.tags.some((tag) =>
