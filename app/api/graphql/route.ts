@@ -22,6 +22,13 @@ interface QueryDish {
   tags: string[];
   title: string;
 }
+interface QueryRecipe {
+  id: string;
+  dishId: string;
+  ingredients: string[];
+  instructions: string;
+  recipeAuthorId: string;
+}
 
 const resolvers = {
   Query: {
@@ -129,7 +136,9 @@ const resolvers = {
           .get();
 
         let deletedRecipeData = null;
+
         if (!recipeSnap.empty) {
+          // @ts-ignore
           deletedRecipeData = {
             id: recipeSnap.docs[0].id,
             ...recipeSnap.docs[0].data(),
@@ -158,7 +167,7 @@ const server = new ApolloServer({
 const handler = startServerAndCreateNextHandler<NextRequest>(server, {
   context: async (req) => {
     const token = req.headers.get("Authorization")?.replace("Bearer ", "");
-    const context = { req, user: null };
+    const context: any = { req, user: null };
 
     // console.log("Token:", token);
 
@@ -173,7 +182,7 @@ const handler = startServerAndCreateNextHandler<NextRequest>(server, {
       //   context.user.admin = true;
       // }
     } catch (error) {
-      console.error("Error verifying token:", error);
+      // console.error("Error verifying token:", error);
       // throw new Error("Invalid token: ");
     }
 

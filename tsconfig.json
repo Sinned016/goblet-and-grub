@@ -20,10 +20,10 @@
     ],
     "paths": {
       "@/*": ["./*"]
-    },
-    "noUnusedLocals": false, // Disables the unused variable check
-    "noUnusedParameters": false, // Disables the unused parameter check
-    "noImplicitAny": false // Allows implicit "any" types
+    }
+    // "noUnusedLocals": false,
+    // "noUnusedParameters": false,
+    // "noImplicitAny": false
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts"],
   "exclude": ["node_modules"]
