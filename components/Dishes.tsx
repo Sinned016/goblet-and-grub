@@ -1,10 +1,10 @@
 "use client";
 
 import { handleSearch } from "@/functions/handleSearch";
-import { dish, dishes, GET_DISHES } from "@/lib/queries";
+import { dishes } from "@/lib/queries";
 import { GraphQLError } from "graphql";
 import Link from "next/link";
-import { ChangeEvent, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 export default function Dishes({
   dishes,

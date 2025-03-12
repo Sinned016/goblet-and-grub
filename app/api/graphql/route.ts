@@ -1,16 +1,13 @@
 import { startServerAndCreateNextHandler } from "@as-integrations/next";
 import { ApolloServer } from "@apollo/server";
 import { NextRequest } from "next/server";
-import { db, auth } from "../../../lib/firebaseAdmin";
+import { db } from "../../../lib/firebaseAdmin";
 import { typeDefs } from "./schema";
-import { doc } from "firebase/firestore/lite";
-import { NextApiRequest } from "next";
-import { Context } from "@apollo/client";
 
 interface AddDishArgs {
   title: string;
   tags: string[];
-  image: String;
+  image: string;
 }
 interface AddRecipeArgs {
   ingredients: string[];
@@ -48,7 +45,7 @@ const resolvers = {
         console.log(err);
       }
     },
-    async dish(_: any, args: { id: string }) {
+    async dish(_: null, args: { id: string }) {
       try {
         const dishRef = db.collection("dishes").doc(args.id);
         const dishSnap = await dishRef.get();
@@ -80,7 +77,7 @@ const resolvers = {
   },
   Mutation: {
     async createDishWithRecipe(
-      _: any,
+      _: null,
       { dish, recipe }: { dish: AddDishArgs; recipe: AddRecipeArgs }
     ) {
       try {
@@ -120,7 +117,7 @@ const resolvers = {
         throw new Error("Failed to create dish with recipe");
       }
     },
-    async deleteDish(_: any, args: { id: string }) {
+    async deleteDish(_: null, args: { id: string }) {
       try {
         //Storing dish data so i can return it, then deleting the data from the database
         const dishSnap = await db.collection("dishes").doc(args.id).get();
@@ -168,7 +165,7 @@ const server = new ApolloServer({
 const handler = startServerAndCreateNextHandler<NextRequest>(server, {
   context: async (req) => {
     const token = req.headers.get("Authorization")?.replace("Bearer ", "");
-    const context: any = { req, user: null };
+    const context = { req, user: null };
 
     // console.log("Token:", token);
 
@@ -183,7 +180,7 @@ const handler = startServerAndCreateNextHandler<NextRequest>(server, {
       //   context.user.admin = true;
       // }
     } catch (error) {
-      // console.error("Error verifying token:", error);
+      console.error("Error verifying token:", error);
       // throw new Error("Invalid token: ");
     }
 

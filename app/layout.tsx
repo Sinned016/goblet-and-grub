@@ -9,6 +9,7 @@ const inriaSerif = Inria_Serif({
   weight: ["400", "700"],
   subsets: ["latin"],
 });
+console.log(inriaSerif);
 
 export const metadata: Metadata = {
   title: "Goblet & Grub",

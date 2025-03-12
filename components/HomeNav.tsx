@@ -1,5 +1,4 @@
 import Link from "next/link";
-import NavSearch from "./NavSearch";
 
 export default function HomeNav() {
   return (
