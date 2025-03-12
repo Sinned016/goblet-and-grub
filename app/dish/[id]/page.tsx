@@ -4,7 +4,7 @@ import { ArrowLeft } from "lucide-react";
 import Link from "next/link";
 
 export default async function DishPage({ params }: { params: { id: string } }) {
-  const { id } = await params;
+  const { id } = params;
 
   const queryString = print(GET_DISH);
 
