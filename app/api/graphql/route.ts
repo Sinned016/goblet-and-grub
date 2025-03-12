@@ -38,7 +38,7 @@ const resolvers = {
         console.log(err);
       }
     },
-    async dish(_: null, args: { id: string }) {
+    async dish(_: any, args: { id: string }) {
       try {
         const dishRef = db.collection("dishes").doc(args.id);
         const dishSnap = await dishRef.get();
@@ -70,7 +70,7 @@ const resolvers = {
   },
   Mutation: {
     async createDishWithRecipe(
-      _: null,
+      _: any,
       { dish, recipe }: { dish: AddDishArgs; recipe: AddRecipeArgs }
     ) {
       try {
@@ -110,7 +110,7 @@ const resolvers = {
         throw new Error("Failed to create dish with recipe");
       }
     },
-    async deleteDish(_: null, args: { id: string }) {
+    async deleteDish(_: any, args: { id: string }) {
       try {
         //Storing dish data so i can return it, then deleting the data from the database
         const dishSnap = await db.collection("dishes").doc(args.id).get();
