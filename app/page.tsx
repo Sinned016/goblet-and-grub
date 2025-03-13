@@ -1,15 +1,20 @@
 import Dishes from "@/components/Dishes";
 import { GET_DISHES } from "@/lib/queries";
+import { BASE_API_URL } from "@/utils/constants";
 import { print } from "graphql";
 
 export default async function Home() {
   const queryString = print(GET_DISHES);
 
-  const apiUrl = process.env.VERCEL_URL
-    ? `https://${process.env.VERCEL_URL}` // For production, use Vercel's URL with https
-    : "http://localhost:3000"; // For development, use localhost
+  // const apiUrl = process.env.VERCEL_URL
+  //   ? `https://${process.env.VERCEL_URL}`
+  //   : "http://localhost:3000";
 
-  const response = await fetch(`${apiUrl}/api/graphql`, {
+  if (!BASE_API_URL) {
+    return null;
+  }
+
+  const response = await fetch(`${BASE_API_URL}/api/graphql`, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ query: queryString }),
