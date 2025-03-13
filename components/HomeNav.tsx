@@ -6,7 +6,7 @@ export default function HomeNav() {
       <Link href={"/"}>
         <img
           src="/goblet.png"
-          className="rotate-12 w-[40] h-[40] sm:w-[60] sm:h-[60]"
+          className="rotate-12 w-10 h-10 sm:w-14 sm:h-14"
           alt=""
         />
       </Link>
