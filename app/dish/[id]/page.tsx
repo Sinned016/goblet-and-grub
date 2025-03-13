@@ -12,8 +12,11 @@ export default async function DishPage({
 
   const queryString = print(GET_DISH);
 
-  // Change localhost:3000 to the actual route of my page later during prod.
-  const response = await fetch(`http://localhost:3000//api/graphql`, {
+  const apiUrl = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}` // For production, use Vercel's URL with https
+    : "http://localhost:3000"; // For development, use localhost
+
+  const response = await fetch(`${apiUrl}/api/graphql`, {
     method: "POST",
     headers: {
       "Content-Type": "application/json",

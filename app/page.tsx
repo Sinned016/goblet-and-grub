@@ -5,15 +5,15 @@ import { print } from "graphql";
 export default async function Home() {
   const queryString = print(GET_DISHES);
 
-  // Change localhost:3000 to the actual route of my page later during prod.
-  const response = await fetch(
-    `${process.env.NEXT_PUBLIC_API_URL}/api/graphql`,
-    {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ query: queryString }),
-    }
-  );
+  const apiUrl = process.env.VERCEL_URL
+    ? `https://${process.env.VERCEL_URL}` // For production, use Vercel's URL with https
+    : "http://localhost:3000"; // For development, use localhost
+
+  const response = await fetch(`${apiUrl}/api/graphql`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ query: queryString }),
+  });
 
   const { data, errors } = await response.json();
 
