@@ -29,7 +29,6 @@ interface QueryRecipe {
   instructions: string;
   recipeAuthorId: string;
 }
-
 const resolvers = {
   Query: {
     async dishes() {
@@ -43,6 +42,7 @@ const resolvers = {
         return dishes;
       } catch (err) {
         console.log(err);
+        throw new Error("Failed to fetch all dishes");
       }
     },
     async dish(_: any, args: { id: string }) {
@@ -53,6 +53,7 @@ const resolvers = {
         return { id: dishSnap.id, ...dishSnap.data() };
       } catch (err) {
         console.log(err);
+        throw new Error("Failed to fetch the dish");
       }
     },
   },
@@ -72,6 +73,7 @@ const resolvers = {
         return recipes[0];
       } catch (err) {
         console.log(err);
+        throw new Error("Failed to fetch the dish recipe");
       }
     },
   },
@@ -118,6 +120,7 @@ const resolvers = {
       }
     },
     async deleteDish(_: any, args: { id: string }) {
+      // Send the ID of the logged in user and check if the user is an admin on the database.
       try {
         //Storing dish data so i can return it, then deleting the data from the database
         const dishSnap = await db.collection("dishes").doc(args.id).get();
@@ -135,15 +138,14 @@ const resolvers = {
           .where("dishId", "==", args.id)
           .get();
 
-        let deletedRecipeData = null;
-
-        if (!recipeSnap.empty) {
-          // @ts-ignore
-          deletedRecipeData = {
-            id: recipeSnap.docs[0].id,
-            ...recipeSnap.docs[0].data(),
-          };
+        if (recipeSnap.empty) {
+          throw new Error("Recipe not found");
         }
+
+        const deletedRecipeData = {
+          id: recipeSnap.docs[0].id,
+          ...recipeSnap.docs[0].data(),
+        };
 
         await db.collection("recipes").doc(recipeSnap.docs[0].id).delete();
 
@@ -153,6 +155,7 @@ const resolvers = {
         };
       } catch (err) {
         console.log("Error deleting dish and recipe" + err);
+        throw new Error("Failed to delete dish and recipe");
       }
     },
   },
@@ -164,30 +167,13 @@ const server = new ApolloServer({
 });
 
 // Firebase authentication context
-const handler = startServerAndCreateNextHandler<NextRequest>(server, {
-  context: async (req) => {
-    const token = req.headers.get("Authorization")?.replace("Bearer ", "");
-    const context: any = { req, user: null };
+const apolloHandler = startServerAndCreateNextHandler(server);
 
-    // console.log("Token:", token);
+// --- Properly Typed Next.js Handlers ---
+export async function GET(request: NextRequest): Promise<Response> {
+  return apolloHandler(request);
+}
 
-    if (!token) {
-      return context;
-    }
-
-    try {
-      // const decodedToken = await auth.verifyIdToken(token);
-      // context.user = decodedToken;
-      // if (decodedToken.admin === true) {
-      //   context.user.admin = true;
-      // }
-    } catch (error) {
-      // console.error("Error verifying token:", error);
-      // throw new Error("Invalid token: ");
-    }
-
-    return context;
-  },
-});
-
-export { handler as GET, handler as POST };
+export async function POST(request: NextRequest): Promise<Response> {
+  return apolloHandler(request);
+}

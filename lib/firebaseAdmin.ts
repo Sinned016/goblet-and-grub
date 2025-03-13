@@ -14,6 +14,5 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore(); // Firestore reference
-const auth = admin.auth(); // Firebase Auth reference
 
-export { db, auth };
+export { db };
