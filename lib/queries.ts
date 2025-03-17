@@ -10,6 +10,7 @@ export const GET_DISHES = gql`
       recipe {
         ingredients
         information
+        recipeAuthor
       }
     }
   }
@@ -23,6 +24,7 @@ export interface dishes {
   recipe: {
     ingredients: string[];
     information: string;
+    recipeAuthor: string;
   };
 }
 

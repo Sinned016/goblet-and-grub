@@ -1,8 +1,9 @@
 import Link from "next/link";
+import AuthStatus from "./AuthStatus";
 
 export default function HomeNav() {
   return (
-    <div className="relative flex flex-row items-center p-4 sm:p-10">
+    <div className="relative flex flex-row items-center justify-between pb-4 pt-2 lg:p-10">
       <Link href={"/"}>
         <img
           src="/goblet.png"
@@ -16,6 +17,8 @@ export default function HomeNav() {
           Goblet & Grub
         </h1>
       </Link>
+
+      <AuthStatus />
     </div>
   );
 }

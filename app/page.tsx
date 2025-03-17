@@ -6,10 +6,6 @@ import { print } from "graphql";
 export default async function Home() {
   const queryString = print(GET_DISHES);
 
-  // const apiUrl = process.env.VERCEL_URL
-  //   ? `https://${process.env.VERCEL_URL}`
-  //   : "http://localhost:3000";
-
   if (!BASE_API_URL) {
     return null;
   }

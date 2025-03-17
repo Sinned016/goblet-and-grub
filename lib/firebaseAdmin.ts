@@ -1,5 +1,6 @@
 // lib/firebaseAdmin.js
 import admin, { ServiceAccount } from "firebase-admin";
+import { getAuth } from "firebase-admin/auth";
 
 if (!admin.apps.length) {
   const serviceAccount: ServiceAccount = {
@@ -14,5 +15,6 @@ if (!admin.apps.length) {
 }
 
 const db = admin.firestore(); // Firestore reference
+const adminAuth = getAuth();
 
-export { db };
+export { db, adminAuth };

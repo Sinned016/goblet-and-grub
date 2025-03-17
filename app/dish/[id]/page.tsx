@@ -13,10 +13,6 @@ export default async function DishPage({
 
   const queryString = print(GET_DISH);
 
-  // const apiUrl = process.env.VERCEL_URL
-  //   ? `https://${process.env.VERCEL_URL}`
-  //   : "http://localhost:3000";
-
   if (!BASE_API_URL) {
     return null;
   }
