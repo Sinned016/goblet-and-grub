@@ -119,7 +119,8 @@ export default function AdminDishes({
             <button
               className="bg-red-500 py-2 px-3 rounded-lg text-white hover:bg-red-600 duration-300"
               onClick={() => {
-                setOpenSettings(false), setOpenDelete(true);
+                setOpenSettings(false);
+                setOpenDelete(true);
               }}
             >
               Delete

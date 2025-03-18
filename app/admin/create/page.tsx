@@ -341,7 +341,8 @@ export default function CreateDish() {
           <div className="flex justify-between items-center mt-2">
             <button
               onClick={(e) => {
-                e.preventDefault(), router.push("/admin");
+                e.preventDefault();
+                router.push("/admin");
               }}
               className="bg-gray-500 py-2 px-3 rounded-lg text-white hover:bg-gray-600 duration-300"
             >

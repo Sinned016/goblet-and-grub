@@ -5,7 +5,11 @@ import { auth } from "@/lib/firebaseClient";
 import { getIdTokenResult, onAuthStateChanged } from "firebase/auth";
 import { useEffect, useState } from "react";
 
-export default function layout({ children }: { children: React.ReactNode }) {
+export default function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [loading, setLoading] = useState(true);
   const router = useRouter();
   const path = usePathname();
