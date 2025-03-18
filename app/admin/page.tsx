@@ -3,6 +3,8 @@ import { GET_DISHES } from "@/lib/queries";
 import { BASE_API_URL } from "@/utils/constants";
 import { print } from "graphql";
 
+export const revalidate = 60;
+
 export default async function Home() {
   const queryString = print(GET_DISHES);
 
