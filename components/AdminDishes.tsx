@@ -11,6 +11,8 @@ import {
   DialogHeader,
   DialogTitle,
 } from "@/components/ui/dialog";
+import { handleDeleteDish } from "@/functions/handleDeleteDish";
+import { useRouter } from "next/navigation";
 
 export default function AdminDishes({
   dishes,
@@ -21,8 +23,10 @@ export default function AdminDishes({
 }) {
   const [search, setSearch] = useState<dishes[]>([]);
   const [selectedDish, setSelectedDish] = useState<dishes | null>(null); // For selected dish
-  const [openSettings, setOpenSettings] = useState(false); // Control dialog open state
-  const [openDelete, setOpenDelete] = useState(false);
+  const [openSettings, setOpenSettings] = useState<boolean>(false); // Control dialog open state
+  const [openDelete, setOpenDelete] = useState<boolean>(false);
+
+  const router = useRouter();
 
   useEffect(() => {
     if (dishes) {
@@ -54,7 +58,7 @@ export default function AdminDishes({
     <div>
       <div className="mb-4">
         <input
-          className="border border-neutral-600 rounded-full bg-white/70 p-1 pl-4 pr-4 w-full "
+          className="border border-neutral-600 rounded-full bg-white/80 p-1 pl-4 pr-4 w-full "
           type="text"
           placeholder="Search for dishes..."
           onChange={(e) => handleSearch(e, dishes, setSearch)}
@@ -67,7 +71,7 @@ export default function AdminDishes({
             return (
               <div
                 key={dish.id}
-                className="bg-white/70 rounded-xl p-4 shadow-lg hover:cursor-pointer border border-neutral-600"
+                className="bg-white/80 rounded-xl p-4 shadow-lg hover:cursor-pointer border border-neutral-600"
                 onClick={() => handleOpenDish(dish)}
               >
                 <div className="">
@@ -106,7 +110,10 @@ export default function AdminDishes({
             </DialogDescription>
           </DialogHeader>
           <div className="flex flex-col gap-2">
-            <button className="bg-yellow-500 py-2 px-3 rounded-lg text-white hover:bg-yellow-600 duration-300">
+            <button
+              onClick={() => router.push(`/admin/edit/${selectedDish?.id}`)}
+              className="bg-yellow-500 py-2 px-3 rounded-lg text-white hover:bg-yellow-600 duration-300"
+            >
               Edit
             </button>
             <button
@@ -130,7 +137,17 @@ export default function AdminDishes({
             </DialogDescription>
           </DialogHeader>
           <div className="flex flex-col gap-2">
-            <button className="bg-red-500 py-2 px-3 rounded-lg text-white hover:bg-red-600 duration-300">
+            <button
+              onClick={() =>
+                handleDeleteDish(
+                  selectedDish,
+                  setSelectedDish,
+                  setOpenDelete,
+                  setSearch
+                )
+              }
+              className="bg-red-500 py-2 px-3 rounded-lg text-white hover:bg-red-600 duration-300"
+            >
               Yes
             </button>
             <button

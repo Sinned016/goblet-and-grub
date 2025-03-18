@@ -40,7 +40,7 @@ export default function Dishes({
     <div>
       <div className="mb-4">
         <input
-          className="border border-neutral-600 rounded-full bg-white/70 p-1 pl-4 pr-4 w-full "
+          className="border border-neutral-600 rounded-full bg-white/80 p-1 pl-4 pr-4 w-full "
           type="text"
           placeholder="Search for dishes..."
           onChange={(e) => handleSearch(e, dishes, setSearch)}
@@ -54,7 +54,7 @@ export default function Dishes({
               <Link
                 href={`/dish/${dish.id}`}
                 key={dish.id}
-                className="bg-white/70 rounded-xl p-4 shadow-lg hover:cursor-pointer border border-neutral-600"
+                className="bg-white/80 rounded-xl p-4 shadow-lg hover:cursor-pointer border border-neutral-600"
               >
                 <div className="">
                   {/*  Change this to "Image" from next.js and add the domain where you get the image from

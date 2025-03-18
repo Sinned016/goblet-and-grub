@@ -37,13 +37,14 @@ export default function AuthStatus() {
     return () => unsubscribe();
   }, []);
 
-  const handleLogout = async () => {
-    try {
-      await signOut(auth); // Sign the user out
-    } catch (error) {
-      console.log("Error logging out");
-    }
-  };
+  // const handleLogout = async () => {
+  //   try {
+  //     await signOut(auth); // Sign the user out
+  //     setIsAdmin(false);
+  //   } catch (error) {
+  //     console.log("Error logging out");
+  //   }
+  // };
 
   return (
     <div className="flex gap-4">
@@ -55,7 +56,7 @@ export default function AuthStatus() {
           Admin
         </button>
       )}
-      {user ? (
+      {/* {user ? (
         <button
           className="bg-white/80 p-2 rounded-lg hover:bg-gray-200/80 hover:cursor-pointer duration-300 text-sm"
           onClick={handleLogout}
@@ -69,7 +70,7 @@ export default function AuthStatus() {
         >
           Sign in
         </button>
-      )}
+      )} */}
     </div>
   );
 }

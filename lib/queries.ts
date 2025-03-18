@@ -54,9 +54,36 @@ export interface dish {
   image: string;
   createdAt: string;
   recipe: {
+    id: string;
     ingredients: string[];
     information: string;
     instructions: string;
     recipeAuthor: string;
   };
 }
+
+export const DELETE_DISH = gql`
+  mutation deleteDish($id: ID!) {
+    deleteDish(id: $id) {
+      id
+      title
+    }
+  }
+`;
+
+export interface deleteDish {
+  id: string;
+  title: string;
+}
+
+export const CREATE_DISH = gql`
+  mutation createDishWithRecipe(
+    $dish: AddDishInput!
+    $recipe: AddRecipeInput!
+  ) {
+    createDishWithRecipe(dish: $dish, recipe: $recipe) {
+      id
+      title
+    }
+  }
+`;

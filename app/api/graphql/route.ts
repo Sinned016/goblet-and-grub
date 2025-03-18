@@ -3,6 +3,7 @@ import { ApolloServer } from "@apollo/server";
 import { NextRequest } from "next/server";
 import { db } from "../../../lib/firebaseAdmin";
 import { typeDefs } from "./schema";
+import { checkAdmin } from "@/lib/checkAdmin";
 
 interface AddDishArgs {
   title: string;
@@ -80,9 +81,16 @@ const resolvers = {
   Mutation: {
     async createDishWithRecipe(
       _: any,
-      { dish, recipe }: { dish: AddDishArgs; recipe: AddRecipeArgs }
+      { dish, recipe }: { dish: AddDishArgs; recipe: AddRecipeArgs },
+      context: any
     ) {
       try {
+        const token = context.req.headers
+          .get("Authorization")
+          ?.split("Bearer ")[1];
+
+        await checkAdmin(token);
+
         const newDishRef = await db.collection("dishes").add({
           title: dish.title,
           tags: dish.tags,
@@ -119,10 +127,16 @@ const resolvers = {
         throw new Error("Failed to create dish with recipe");
       }
     },
-    async deleteDish(_: any, args: { id: string }) {
+    async deleteDish(_: any, args: { id: string }, context: any) {
       // Send the ID of the logged in user and check if the user is an admin on the database.
       try {
         //Storing dish data so i can return it, then deleting the data from the database
+        const token = context.req.headers
+          .get("Authorization")
+          ?.split("Bearer ")[1];
+
+        await checkAdmin(token);
+
         const dishSnap = await db.collection("dishes").doc(args.id).get();
 
         if (!dishSnap.exists) {
@@ -167,7 +181,11 @@ const server = new ApolloServer({
 });
 
 // Firebase authentication context
-const apolloHandler = startServerAndCreateNextHandler(server);
+const apolloHandler = startServerAndCreateNextHandler(server, {
+  context: async (req) => {
+    return { req };
+  },
+});
 
 // --- Properly Typed Next.js Handlers ---
 export async function GET(request: NextRequest): Promise<Response> {
