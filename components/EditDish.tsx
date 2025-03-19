@@ -207,8 +207,8 @@ export default function EditDish({ dish }: { dish: dish }) {
                 className="transition-all duration-500 ease-in-out mt-2 mb-4 rounded-xl object-cover h-44 sm:h-64 border border-neutral-600"
                 src={imagePreview}
                 alt="Image preview"
-                width={300} // Set your preferred width
-                height={300} // Set your preferred height
+                width={1000} // Set your preferred width
+                height={1000} // Set your preferred height
               />
             </div>
           ) : (
