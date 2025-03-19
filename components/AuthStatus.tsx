@@ -48,14 +48,13 @@ export default function AuthStatus() {
 
   return (
     <div className="flex gap-4">
-      {isAdmin && (
-        <button
-          className="bg-white/80 p-2 rounded-lg hover:bg-gray-200/80 hover:cursor-pointer duration-300 text-sm"
-          onClick={() => router.push("/admin")}
-        >
-          Admin
-        </button>
-      )}
+      <button
+        className="bg-white/80 p-2 rounded-lg hover:bg-gray-200/80 hover:cursor-pointer duration-300 text-sm"
+        onClick={() => router.push("/admin")}
+      >
+        Admin
+      </button>
+
       {/* {user ? (
         <button
           className="bg-white/80 p-2 rounded-lg hover:bg-gray-200/80 hover:cursor-pointer duration-300 text-sm"
