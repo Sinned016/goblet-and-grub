@@ -46,7 +46,7 @@ export default async function EditPage({
   }
 
   return (
-    <div className="max-w-3xl mx-auto flex flex-col gap-4 xl:px-8">
+    <div className="max-w-3xl mx-auto flex flex-col gap-4 xl:px-8 mt-4">
       {/* <Link
         href={"/admin"}
         className="flex max-w-fit gap-2 font-bold bg-white/70 text-black hover:bg-gray-200/70 hover:cursor-pointer duration-300 border border-black p-2 rounded-xl    "
@@ -54,16 +54,6 @@ export default async function EditPage({
         <ArrowLeft />
         <p>Back to dishes</p>
       </Link> */}
-
-      {/*  Change this to "Image" from next.js and add the domain where you get the image from
-      in next.config.js when youve setup image upload */}
-      <Image
-        src={dish.image}
-        alt={dish.title}
-        width={1000}
-        height={1000}
-        className="rounded-xl object-cover h-72 sm:h-[380px] w-full mt-4"
-      />
 
       <div className="p-4 bg-white/80 rounded-xl  border border-neutral-600">
         <h1 className="text-3xl font-bold text-center">Edit {dish.title}</h1>

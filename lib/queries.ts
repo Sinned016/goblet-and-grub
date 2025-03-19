@@ -87,3 +87,22 @@ export const CREATE_DISH = gql`
     }
   }
 `;
+
+export interface createDish {
+  id: string;
+  title: string;
+}
+
+export const EDIT_DISH = gql`
+  mutation editDish($dish: EditDishInput!, $recipe: EditRecipeInput!) {
+    editDish(dish: $dish, recipe: $recipe) {
+      id
+      title
+    }
+  }
+`;
+
+export interface editDish {
+  id: string;
+  title: string;
+}

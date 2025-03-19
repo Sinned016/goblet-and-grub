@@ -23,6 +23,7 @@ export const typeDefs = gql`
   type Mutation {
     createDishWithRecipe(dish: AddDishInput, recipe: AddRecipeInput): Dish
     deleteDish(id: ID!): Dish
+    editDish(dish: EditDishInput, recipe: EditRecipeInput): Dish
   }
   input AddDishInput {
     title: String!
@@ -30,6 +31,20 @@ export const typeDefs = gql`
     image: String!
   }
   input AddRecipeInput {
+    ingredients: [String!]!
+    information: String!
+    instructions: String!
+    recipeAuthor: String!
+  }
+  input EditDishInput {
+    id: ID!
+    title: String!
+    tags: [String!]!
+    image: String!
+    createdAt: String!
+  }
+  input EditRecipeInput {
+    id: ID!
     ingredients: [String!]!
     information: String!
     instructions: String!

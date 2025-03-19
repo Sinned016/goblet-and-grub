@@ -23,13 +23,21 @@ interface QueryDish {
   tags: string[];
   title: string;
 }
-interface QueryRecipe {
+interface EditDishArgs {
   id: string;
-  dishId: string;
-  ingredients: string[];
-  instructions: string;
-  recipeAuthorId: string;
+  title: string;
+  tags: string[];
+  image: string;
+  createdAt: string;
 }
+interface EditRecipeArgs {
+  id: string;
+  ingredients: string[];
+  information: string;
+  instructions: string;
+  recipeAuthor: string;
+}
+
 const resolvers = {
   Query: {
     async dishes() {
@@ -125,6 +133,62 @@ const resolvers = {
       } catch (err) {
         console.error("Error creating dish with recipe:", err);
         throw new Error("Failed to create dish with recipe");
+      }
+    },
+    async editDish(
+      _: any,
+      {
+        dish,
+        recipe,
+      }: {
+        dish: EditDishArgs;
+        recipe: EditRecipeArgs;
+      },
+      context: any
+    ) {
+      try {
+        const token = context.req.headers
+          .get("Authorization")
+          ?.split("Bearer ")[1];
+
+        await checkAdmin(token);
+
+        console.log("DISH: ", dish);
+        console.log("RECIPE: ", recipe);
+
+        const dishRef = db.collection("dishes").doc(dish.id);
+        const recipeRef = db.collection("recipes").doc(recipe.id);
+
+        await dishRef.update({
+          title: dish.title,
+          tags: dish.tags,
+          image: dish.image,
+        });
+
+        await recipeRef.update({
+          ingredients: recipe.ingredients,
+          information: recipe.information,
+          instructions: recipe.instructions,
+          recipeAuthor: recipe.recipeAuthor,
+        });
+
+        return {
+          id: dish.id,
+          title: dish.title,
+          tags: dish.tags,
+          image: dish.image,
+          createdAt: dish.createdAt,
+          recipe: {
+            id: recipe.id,
+            ingredients: recipe.ingredients,
+            information: recipe.information,
+            instructions: recipe.instructions,
+            recipeAuthor: recipe.recipeAuthor,
+          },
+        };
+      } catch (err) {
+        console.error("Error editing dish", err);
+        throw new Error("Failed to edit dish");
       }
     },
     async deleteDish(_: any, args: { id: string }, context: any) {

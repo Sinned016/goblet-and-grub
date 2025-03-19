@@ -22,9 +22,9 @@ import {
 } from "@/components/ui/dialog";
 import { isFieldEmpty } from "@/functions/isFieldEmpty";
 import { useRouter } from "next/navigation";
-import { uploadImage } from "@/functions/uploadImage";
 import { UploadButton } from "@/lib/uploadthing";
 import Image from "next/image";
+import { X } from "lucide-react";
 
 interface Dish {
   title: string;
@@ -169,14 +169,6 @@ export default function CreateDish() {
     }
   }
 
-  function handleImagefile(e: ChangeEvent<HTMLInputElement>) {
-    if (e.target.files && e.target.files.length > 0) {
-      const imageURL = uploadImage(e.target.files[0]);
-
-      console.log(imageURL);
-    }
-  }
-
   return (
     <div className="max-w-3xl mx-auto flex flex-col gap-4 xl:px-8">
       <div className="p-4 bg-white/80 rounded-lg mt-4 border border-neutral-600">
@@ -293,8 +285,23 @@ export default function CreateDish() {
             {newDish.ingredients.length > 0 && (
               <div className="flex gap-2 mt-4 mb-2 rounded-lg flex-wrap ">
                 {newDish.ingredients.map((ingredient, i) => (
-                  <div className="px-3 py-2 bg-green-400 rounded-full" key={i}>
+                  <div
+                    className="px-3 py-2 bg-green-400 rounded-full flex flex-row items-center gap-2"
+                    key={i}
+                  >
                     <p className="text-sm">{ingredient}</p>
+                    <X
+                      size={18}
+                      className="cursor-pointer"
+                      onClick={() =>
+                        setNewDish((prev) => ({
+                          ...prev,
+                          ingredients: prev.ingredients.filter(
+                            (_, ingIndex) => ingIndex !== i
+                          ),
+                        }))
+                      }
+                    />
                   </div>
                 ))}
               </div>
@@ -343,8 +350,23 @@ export default function CreateDish() {
             {newDish.tags.length > 0 && (
               <div className="flex gap-2  mt-4 mb-2 rounded-lg flex-wrap ">
                 {newDish.tags.map((tag, i) => (
-                  <div className="px-3 py-2 bg-yellow-400 rounded-full" key={i}>
+                  <div
+                    className="px-3 py-2 bg-yellow-400 rounded-full flex flex-row items-center gap-2"
+                    key={i}
+                  >
                     <p className="text-sm">{tag}</p>
+                    <X
+                      size={18}
+                      className="cursor-pointer"
+                      onClick={() =>
+                        setNewDish((prev) => ({
+                          ...prev,
+                          tags: prev.tags.filter(
+                            (_, tagIndex) => tagIndex !== i
+                          ),
+                        }))
+                      }
+                    />
                   </div>
                 ))}
               </div>
