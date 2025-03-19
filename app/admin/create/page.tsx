@@ -22,6 +22,9 @@ import {
 } from "@/components/ui/dialog";
 import { isFieldEmpty } from "@/functions/isFieldEmpty";
 import { useRouter } from "next/navigation";
+import { uploadImage } from "@/functions/uploadImage";
+import { UploadButton } from "@/lib/uploadthing";
+import Image from "next/image";
 
 interface Dish {
   title: string;
@@ -56,6 +59,8 @@ export default function CreateDish() {
     tags: false,
   });
   const [saveError, setSaveError] = useState<string>("");
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [isUploadingImage, setIsUploadingImage] = useState<boolean>(false);
 
   const router = useRouter();
 
@@ -164,6 +169,14 @@ export default function CreateDish() {
     }
   }
 
+  function handleImagefile(e: ChangeEvent<HTMLInputElement>) {
+    if (e.target.files && e.target.files.length > 0) {
+      const imageURL = uploadImage(e.target.files[0]);
+
+      console.log(imageURL);
+    }
+  }
+
   return (
     <div className="max-w-3xl mx-auto flex flex-col gap-4 xl:px-8">
       <div className="p-4 bg-white/80 rounded-lg mt-4 border border-neutral-600">
@@ -188,7 +201,6 @@ export default function CreateDish() {
             />
           </div>
 
-          {/* Make it so you can upload images */}
           <div>
             <label
               className={
@@ -198,13 +210,39 @@ export default function CreateDish() {
             >
               Image*
             </label>
-            <input
-              className="w-full bg-white/80 border py-2 px-3 border-neutral-600 rounded-lg my-2"
-              value={newDish.image}
-              name="image"
-              type="text"
-              placeholder="Dish image..."
-              onChange={handleEditChange}
+            {imagePreview && (
+              <div className="flex justify-center ">
+                <Image
+                  className="transition-all duration-500 ease-in-out mt-2 mb-4 rounded-xl object-cover h-44 sm:h-64 border border-neutral-600"
+                  src={imagePreview}
+                  alt="Image preview"
+                  width={300} // Set your preferred width
+                  height={300} // Set your preferred height
+                />
+              </div>
+            )}
+
+            <UploadButton
+              endpoint="imageUploader"
+              onBeforeUploadBegin={(files) => {
+                if (files && files.length > 0) {
+                  setIsUploadingImage(true);
+                  setImagePreview(URL.createObjectURL(files[0])); // Use the first file in the array
+                }
+                return files;
+              }}
+              onClientUploadComplete={(res) => {
+                console.log("Files: ", res);
+                setNewDish((prev) => ({
+                  ...prev,
+                  image: res[0].ufsUrl,
+                }));
+                setIsUploadingImage(false);
+              }}
+              onUploadError={(error: Error) => {
+                console.log(error);
+                alert(`Error: ${error.message}`);
+              }}
             />
           </div>
 
@@ -348,7 +386,14 @@ export default function CreateDish() {
             >
               Cancel
             </button>
-            <button className="bg-green-500 py-2 px-3 rounded-lg text-white hover:bg-green-600 duration-300">
+            <button
+              className={`py-2 px-3 rounded-lg text-white duration-300 transition-all ${
+                isUploadingImage
+                  ? "bg-gray-500 cursor-not-allowed opacity-50"
+                  : "bg-green-500 hover:bg-green-600"
+              }`}
+              disabled={isUploadingImage} // Disable button when uploading
+            >
               Save
             </button>
           </div>
