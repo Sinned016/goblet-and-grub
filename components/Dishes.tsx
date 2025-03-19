@@ -3,6 +3,7 @@
 import { handleSearch } from "@/functions/handleSearch";
 import { dishes } from "@/lib/queries";
 import { GraphQLError } from "graphql";
+import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 
@@ -59,10 +60,12 @@ export default function Dishes({
                 <div className="">
                   {/*  Change this to "Image" from next.js and add the domain where you get the image from
                       in next.config.js when youve setup image upload */}
-                  <img
+                  <Image
                     className="rounded-xl object-cover h-32 sm:h-52 md:h-64 w-full"
                     src={dish.image}
                     alt={dish.title}
+                    width={1000} // Set your preferred width
+                    height={1000} // Set your preferred height
                   />
 
                   <div className="flex flex-col gap-2 mt-2">

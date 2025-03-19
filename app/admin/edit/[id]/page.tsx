@@ -3,6 +3,7 @@ import { dish, GET_DISH } from "@/lib/queries";
 import { BASE_API_URL } from "@/utils/constants";
 import { print } from "graphql";
 import { ArrowLeft } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function EditPage({
@@ -56,9 +57,11 @@ export default async function EditPage({
 
       {/*  Change this to "Image" from next.js and add the domain where you get the image from
       in next.config.js when youve setup image upload */}
-      <img
+      <Image
         src={dish.image}
         alt={dish.title}
+        width={1000}
+        height={1000}
         className="rounded-xl object-cover h-72 sm:h-[380px] w-full mt-4"
       />
 

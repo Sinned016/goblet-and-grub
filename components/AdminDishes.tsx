@@ -13,6 +13,7 @@ import {
 } from "@/components/ui/dialog";
 import { handleDeleteDish } from "@/functions/handleDeleteDish";
 import { useRouter } from "next/navigation";
+import Image from "next/image";
 
 export default function AdminDishes({
   dishes,
@@ -77,10 +78,12 @@ export default function AdminDishes({
                 <div className="">
                   {/*  Change this to "Image" from next.js and add the domain where you get the image from
                       in next.config.js when youve setup image upload */}
-                  <img
+                  <Image
                     className="rounded-xl object-cover h-32 sm:h-52 md:h-64 w-full"
                     src={dish.image}
                     alt={dish.title}
+                    width={1000}
+                    height={1000}
                   />
 
                   <div className="flex flex-col gap-2 mt-2">

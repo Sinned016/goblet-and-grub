@@ -2,6 +2,7 @@ import { dish, GET_DISH } from "@/lib/queries";
 import { BASE_API_URL } from "@/utils/constants";
 import { print } from "graphql";
 import { ArrowLeft } from "lucide-react";
+import Image from "next/image";
 import Link from "next/link";
 
 export default async function DishPage({
@@ -55,9 +56,11 @@ export default async function DishPage({
 
       {/*  Change this to "Image" from next.js and add the domain where you get the image from
       in next.config.js when youve setup image upload */}
-      <img
+      <Image
         src={dish.image}
         alt={dish.title}
+        width={1000} // Set your preferred width
+        height={1000} // Set your preferred height
         className="rounded-xl object-cover h-72 sm:h-[380px] w-full "
       />
 
