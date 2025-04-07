@@ -36,6 +36,7 @@ interface Dish {
   recipeAuthor: string;
 }
 
+// Add colories, cooking time and servings.
 export default function CreateDish() {
   const [newDish, setNewDish] = useState<Dish>({
     title: "",

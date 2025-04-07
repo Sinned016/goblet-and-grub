@@ -45,17 +45,18 @@ export default async function DishPage({
   }
 
   return (
-    <div className="max-w-3xl mx-auto flex flex-col gap-4 xl:px-8">
-      <Link
+    <div className="max-w-3xl mx-auto flex flex-col gap-4">
+      {/* <Link
         href={"/"}
         className="flex max-w-fit gap-2 font-bold bg-white/70 text-black hover:bg-gray-200/70 hover:cursor-pointer duration-300 border border-black p-2 rounded-xl    "
       >
         <ArrowLeft />
         <p>Back to home</p>
-      </Link>
+      </Link> */}
 
       {/*  Change this to "Image" from next.js and add the domain where you get the image from
       in next.config.js when youve setup image upload */}
+
       <Image
         src={dish.image}
         alt={dish.title}
@@ -64,28 +65,27 @@ export default async function DishPage({
         className="rounded-xl object-cover h-72 sm:h-[380px] w-full "
       />
 
-      <div className="flex justify-between item-center">
-        <p className="font-bold">Author: {dish.recipe.recipeAuthor}</p>
-        <p className="font-bold">{dish.createdAt.split("T")[0]}</p>
-      </div>
+      <div className=" flex flex-col gap-4 p-4 bg-white/80 rounded-xl">
+        <h1 className="text-4xl font-bold">{dish.title}</h1>
 
-      <h1 className="text-4xl font-bold">{dish.title}</h1>
-
-      <div className="bg-white/70 p-4 rounded-xl border border-neutral-600">
-        <h2 className="text-2xl font-bold">About</h2>
         <p>{dish.recipe.information}</p>
-      </div>
 
-      <div className="bg-white/70 p-4 rounded-xl border border-neutral-600">
-        <h2 className="text-2xl font-bold">Ingredients</h2>
-        {dish.recipe.ingredients.map((ingredient, i) => {
-          return <div key={i}>{ingredient}</div>;
-        })}
-      </div>
+        <div className="">
+          <h2 className="text-3xl font-bold mb-2">Ingredients</h2>
+          {dish.recipe.ingredients.map((ingredient, i) => {
+            return <div key={i}>{ingredient}</div>;
+          })}
+        </div>
 
-      <div className="bg-white/70 p-4 rounded-xl border border-neutral-600">
-        <h2 className="text-2xl font-bold">Recipe</h2>
-        <div dangerouslySetInnerHTML={{ __html: dish.recipe.instructions }} />
+        <div className="">
+          <h2 className="text-3xl font-bold mb-2">Recipe</h2>
+          <div dangerouslySetInnerHTML={{ __html: dish.recipe.instructions }} />
+        </div>
+
+        <div className="flex flex-row justify-between">
+          <p className="font-bold">{dish.recipe.recipeAuthor}</p>
+          <p className="font-bold">{dish.createdAt.split("T")[0]}</p>
+        </div>
       </div>
     </div>
   );

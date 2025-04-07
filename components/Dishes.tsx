@@ -55,7 +55,7 @@ export default function Dishes({
               <Link
                 href={`/dish/${dish.id}`}
                 key={dish.id}
-                className="bg-white/80 rounded-xl p-4 shadow-lg hover:cursor-pointer border border-neutral-600"
+                className="bg-white/80 rounded-xl shadow-lg hover:cursor-pointer p-4"
               >
                 <div className="">
                   {/*  Change this to "Image" from next.js and add the domain where you get the image from
