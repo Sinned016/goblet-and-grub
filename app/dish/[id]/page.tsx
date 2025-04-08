@@ -45,7 +45,7 @@ export default async function DishPage({
   }
 
   return (
-    <div className="max-w-3xl mx-auto flex flex-col gap-4">
+    <div className="max-w-3xl mx-auto flex flex-col gap-4 mt-4">
       {/* <Link
         href={"/"}
         className="flex max-w-fit gap-2 font-bold bg-white/70 text-black hover:bg-gray-200/70 hover:cursor-pointer duration-300 border border-black p-2 rounded-xl    "
@@ -57,32 +57,44 @@ export default async function DishPage({
       {/*  Change this to "Image" from next.js and add the domain where you get the image from
       in next.config.js when youve setup image upload */}
 
-      <Image
-        src={dish.image}
-        alt={dish.title}
-        width={1000} // Set your preferred width
-        height={1000} // Set your preferred height
-        className="rounded-xl object-cover h-72 sm:h-[380px] w-full "
-      />
-
-      <div className=" flex flex-col gap-4 p-4 bg-white/80 rounded-xl">
-        <h1 className="text-4xl font-bold">{dish.title}</h1>
-
-        <p>{dish.recipe.information}</p>
-
-        <div className="">
-          <h2 className="text-3xl font-bold mb-2">Ingredients</h2>
-          {dish.recipe.ingredients.map((ingredient, i) => {
-            return <div key={i}>{ingredient}</div>;
-          })}
+      <div className=" flex flex-col bg-white/90 rounded-xl shadow-xl">
+        <div className="p-8 sm:p-10">
+          <h1 className="text-4xl font-bold mb-4">{dish.title}</h1>
+          <p className="text-md sm:text-lg">{dish.recipe.information}</p>
         </div>
 
-        <div className="">
-          <h2 className="text-3xl font-bold mb-2">Recipe</h2>
-          <div dangerouslySetInnerHTML={{ __html: dish.recipe.instructions }} />
+        <Image
+          src={dish.image}
+          alt={dish.title}
+          width={1000} // Set your preferred width
+          height={1000} // Set your preferred height
+          className=" object-cover h-52 sm:h-[380px] w-full "
+        />
+
+        <div className="flex flex-col sm:flex-row p-4 sm:p-6 gap-4">
+          <div className="p-4">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4">INGREDIENTS</h2>
+            {dish.recipe.ingredients.map((ingredient, i) => {
+              return (
+                <div className="text-md" key={i}>
+                  {ingredient}
+                </div>
+              );
+            })}
+          </div>
+
+          <div className="border border-gray-500"></div>
+
+          <div className="p-4">
+            <h2 className="text-2xl sm:text-3xl font-bold mb-4">DIRECTIONS</h2>
+            <div
+              className="text-md"
+              dangerouslySetInnerHTML={{ __html: dish.recipe.instructions }}
+            />
+          </div>
         </div>
 
-        <div className="flex flex-row justify-between">
+        <div className="flex flex-row justify-between p-8 sm:p-10">
           <p className="font-bold">{dish.recipe.recipeAuthor}</p>
           <p className="font-bold">{dish.createdAt.split("T")[0]}</p>
         </div>

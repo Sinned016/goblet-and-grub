@@ -6,6 +6,7 @@ import {
   signOut,
   User,
 } from "firebase/auth";
+import { ChefHat, Pizza, Plus } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react";
 
@@ -49,10 +50,10 @@ export default function AuthStatus() {
   return (
     <div className="flex gap-4">
       <button
-        className="bg-white/80 p-2 rounded-lg hover:bg-gray-200/80 hover:cursor-pointer duration-300 text-sm"
+        className="bg-white/90 p-2 rounded-lg hover:bg-gray-200/80 hover:cursor-pointer duration-300 text-sm"
         onClick={() => router.push("/admin")}
       >
-        Admin
+        <Plus />
       </button>
 
       {/* {user ? (

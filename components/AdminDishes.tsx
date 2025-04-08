@@ -59,7 +59,7 @@ export default function AdminDishes({
     <div>
       <div className="mb-4">
         <input
-          className="border border-neutral-600 rounded-full bg-white/80 p-1 pl-4 pr-4 w-full shadow-lg"
+          className="border border-neutral-600 rounded-full bg-white/90 p-1 pl-4 pr-4 w-full shadow-lg"
           type="text"
           placeholder="Search for dishes..."
           onChange={(e) => handleSearch(e, dishes, setSearch)}

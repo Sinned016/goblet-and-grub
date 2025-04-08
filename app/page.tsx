@@ -23,11 +23,11 @@ export default async function Home() {
   return (
     <div className="">
       <div className="max-w-5xl mx-auto ">
-        <div className="mb-10">
-          <p className="text-center text-xl sm:text-2xl font-bold">
+        <div className="mt-4 mb-8">
+          <p className="text-center text-lg sm:text-2xl font-bold">
             Find your next meal at Goblet & Grub.
           </p>
-          <p className="text-center text-xl sm:text-2xl font-bold">
+          <p className="text-center text-lg sm:text-2xl font-bold">
             A place to discover and enjoy delicious recipes.
           </p>
         </div>

@@ -55,7 +55,7 @@ export default async function EditPage({
         <p>Back to dishes</p>
       </Link> */}
 
-      <div className="p-4 bg-white/80 rounded-xl  border border-neutral-600">
+      <div className="p-4 bg-white/90 rounded-xl  border border-neutral-600">
         <h1 className="text-3xl font-bold text-center">Edit {dish.title}</h1>
 
         <EditDish dish={dish} />

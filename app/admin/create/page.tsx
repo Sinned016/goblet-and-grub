@@ -172,7 +172,7 @@ export default function CreateDish() {
 
   return (
     <div className="max-w-3xl mx-auto flex flex-col gap-4 xl:px-8">
-      <div className="p-4 bg-white/80 rounded-lg mt-4 border border-neutral-600">
+      <div className="p-4 bg-white/90 rounded-lg mt-4 border border-neutral-600">
         <h1 className="font-bold text-3xl text-center">Create Dish</h1>
         <form className="flex flex-col gap-2" onSubmit={handleSave}>
           <div>
