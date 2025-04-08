@@ -2,6 +2,7 @@ import Dishes from "@/components/Dishes";
 import { GET_DISHES } from "@/lib/queries";
 import { BASE_API_URL } from "@/utils/constants";
 import { print } from "graphql";
+import { Suspense } from "react";
 
 export const revalidate = 60;
 
@@ -32,7 +33,9 @@ export default async function Home() {
           </p>
         </div>
 
-        <Dishes dishes={data.dishes} errors={errors} />
+        <Suspense fallback={<div>Loading...</div>}>
+          <Dishes dishes={data.dishes} errors={errors} />
+        </Suspense>
       </div>
     </div>
   );
