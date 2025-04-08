@@ -87,7 +87,9 @@ export default function AdminDishes({
                   />
 
                   <div className="flex flex-col gap-2 mt-2">
-                    <h3 className="text-2xl sm:text-3xl">{dish.title}</h3>
+                    <h3 className="font-amaticSC font-bold text-3xl sm:text-4xl">
+                      {dish.title}
+                    </h3>
                     <p className="line-clamp-3 text-sm sm:text-md">
                       {dish.recipe.information}
                     </p>
@@ -107,7 +109,9 @@ export default function AdminDishes({
       <Dialog open={openSettings} onOpenChange={setOpenSettings}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>{selectedDish?.title}</DialogTitle>
+            <DialogTitle className="font-amaticSC font-bold text-4xl">
+              {selectedDish?.title}
+            </DialogTitle>
             <DialogDescription>
               Do you want to delete or edit your dish?
             </DialogDescription>
@@ -135,7 +139,9 @@ export default function AdminDishes({
       <Dialog open={openDelete} onOpenChange={setOpenDelete}>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Delete {selectedDish?.title}?</DialogTitle>
+            <DialogTitle className="font-amaticSC font-bold text-4xl">
+              Delete {selectedDish?.title}?
+            </DialogTitle>
             <DialogDescription>
               Do you want to delete {selectedDish?.title}?
             </DialogDescription>

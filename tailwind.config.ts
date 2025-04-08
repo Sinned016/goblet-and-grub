@@ -11,7 +11,8 @@ export default withUt({
   theme: {
     extend: {
       fontFamily: {
-        serif: ["Inria Serif", "serif"],
+        quicksand: ["var(--font-quicksand)"],
+        amaticSC: ["var(--font-amatic-sc)"],
       },
       backgroundImage: {
         homepage: "url('/home-bg.jpg')",

@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inria_Serif } from "next/font/google";
+import { Quicksand, Amatic_SC } from "next/font/google";
 import "./globals.css";
 import ApolloProviderWrapper from "@/components/ApolloProviderWrapper";
 import HomeNav from "@/components/HomeNav";
@@ -7,8 +7,14 @@ import { NextSSRPlugin } from "@uploadthing/react/next-ssr-plugin";
 import { extractRouterConfig } from "uploadthing/server";
 import { ourFileRouter } from "@/app/api/uploadthing/core";
 
-const inriaSerif = Inria_Serif({
-  variable: "--font-inria-serif",
+const quicksand = Quicksand({
+  variable: "--font-quicksand",
+  weight: ["300", "400", "700"],
+  subsets: ["latin"],
+});
+
+const amaticSC = Amatic_SC({
+  variable: "--font-amatic-sc",
   weight: ["400", "700"],
   subsets: ["latin"],
 });
@@ -24,8 +30,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`font-serif antialiased`}>
+    <html lang="en" className={`${amaticSC.variable} ${quicksand.variable}`}>
+      <body className={`${quicksand.className}`}>
         <div className="bg-homepage bg-cover bg-center bg-fixed min-h-screen p-4">
           <NextSSRPlugin
             /**

@@ -69,7 +69,9 @@ export default function Dishes({
                   />
 
                   <div className="flex flex-col gap-2 mt-2">
-                    <h3 className="text-2xl sm:text-3xl">{dish.title}</h3>
+                    <h3 className="font-amaticSC font-bold text-3xl sm:text-4xl">
+                      {dish.title}
+                    </h3>
                     <p className="line-clamp-3 text-sm sm:text-md">
                       {dish.recipe.information}
                     </p>

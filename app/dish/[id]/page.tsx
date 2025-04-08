@@ -59,7 +59,9 @@ export default async function DishPage({
 
       <div className=" flex flex-col bg-white/90 rounded-xl shadow-xl">
         <div className="p-8 sm:p-10">
-          <h1 className="text-4xl font-bold mb-4">{dish.title}</h1>
+          <h1 className="text-5xl font-semibold font-amaticSC mb-4">
+            {dish.title}
+          </h1>
           <p className="text-md sm:text-lg">{dish.recipe.information}</p>
         </div>
 
@@ -73,7 +75,9 @@ export default async function DishPage({
 
         <div className="flex flex-col sm:flex-row p-4 sm:p-6 gap-4">
           <div className="p-4">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4">INGREDIENTS</h2>
+            <h2 className="text-3xl sm:text-4xl font-amaticSC font-semibold mb-4 underline underline-offset-4 decoration-1">
+              INGREDIENTS
+            </h2>
             {dish.recipe.ingredients.map((ingredient, i) => {
               return (
                 <div className="text-md" key={i}>
@@ -86,7 +90,9 @@ export default async function DishPage({
           <div className="border border-gray-500"></div>
 
           <div className="p-4">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4">DIRECTIONS</h2>
+            <h2 className="text-3xl sm:text-4xl font-amaticSC font-semibold mb-4 underline underline-offset-4 decoration-1">
+              DIRECTIONS
+            </h2>
             <div
               className="text-md"
               dangerouslySetInnerHTML={{ __html: dish.recipe.instructions }}
@@ -95,8 +101,8 @@ export default async function DishPage({
         </div>
 
         <div className="flex flex-row justify-between p-8 sm:p-10">
-          <p className="font-bold">{dish.recipe.recipeAuthor}</p>
-          <p className="font-bold">{dish.createdAt.split("T")[0]}</p>
+          <p className="font-semibold">{dish.recipe.recipeAuthor}</p>
+          <p className="font-semibold">{dish.createdAt.split("T")[0]}</p>
         </div>
       </div>
     </div>

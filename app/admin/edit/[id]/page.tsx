@@ -46,7 +46,7 @@ export default async function EditPage({
   }
 
   return (
-    <div className="max-w-3xl mx-auto flex flex-col gap-4 xl:px-8 mt-4">
+    <div className="max-w-3xl mx-auto xl:px-8 mt-4">
       {/* <Link
         href={"/admin"}
         className="flex max-w-fit gap-2 font-bold bg-white/70 text-black hover:bg-gray-200/70 hover:cursor-pointer duration-300 border border-black p-2 rounded-xl    "
@@ -55,8 +55,10 @@ export default async function EditPage({
         <p>Back to dishes</p>
       </Link> */}
 
-      <div className="p-4 bg-white/90 rounded-xl  border border-neutral-600">
-        <h1 className="text-3xl font-bold text-center">Edit {dish.title}</h1>
+      <div className="p-6 bg-white/90 rounded-xl border border-neutral-600">
+        <h1 className="font-amaticSC font-bold text-5xl text-center mb-2">
+          Edit Dish
+        </h1>
 
         <EditDish dish={dish} />
       </div>
