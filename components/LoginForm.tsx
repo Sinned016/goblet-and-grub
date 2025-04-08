@@ -42,7 +42,9 @@ export default function LoginForm() {
       className="border rounded-xl border-neutral-600 p-4 bg-white/70"
       onSubmit={(e) => handleLogin(e)}
     >
-      <h1 className="font-bold text-3xl text-center mb-2">Admin Sign in</h1>
+      <h1 className="font-amaticSC font-bold text-4xl text-center mb-2">
+        Admin Sign in
+      </h1>
 
       <div className="flex flex-col gap-2 mb-2">
         <p className="font-bold">Email</p>

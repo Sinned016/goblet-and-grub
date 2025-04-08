@@ -72,7 +72,7 @@ export default function AdminDishes({
             return (
               <div
                 key={dish.id}
-                className="bg-white/80 rounded-xl p-4 shadow-lg hover:cursor-pointer"
+                className="bg-white/90 rounded-xl shadow-lg hover:cursor-pointer hover:scale-105 p-4 duration-300"
                 onClick={() => handleOpenDish(dish)}
               >
                 <div className="">
