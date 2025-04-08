@@ -6,6 +6,8 @@ import { GraphQLError } from "graphql";
 import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
+import ChangePage from "./ChangePage";
+import { useSearchParams } from "next/navigation";
 
 export default function Dishes({
   dishes,
@@ -14,13 +16,27 @@ export default function Dishes({
   dishes: dishes[];
   errors: GraphQLError;
 }) {
+  const searchParams = useSearchParams();
+  const page = searchParams.get("page");
+
   const [search, setSearch] = useState<dishes[]>([]);
+  const [currentPage, setCurrentPage] = useState<number>(1);
 
   useEffect(() => {
     if (dishes) {
       setSearch(dishes);
     }
+
+    if (page) {
+      setCurrentPage(parseInt(page));
+    }
   }, [dishes]);
+
+  const itemsPerPage = 6;
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = currentPage * itemsPerPage;
+  const paginatedDishes = search.slice(startIndex, endIndex);
+  const hasNextPage = search.length > endIndex;
 
   if (!dishes) {
     return (
@@ -48,9 +64,9 @@ export default function Dishes({
         />
       </div>
 
-      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-12">
+      <div className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-12 mb-4">
         {search.length > 0 &&
-          search?.map((dish: dishes) => {
+          paginatedDishes?.slice(0, 6).map((dish: dishes) => {
             return (
               <Link
                 href={`/dish/${dish.id}`}
@@ -81,6 +97,12 @@ export default function Dishes({
             );
           })}
       </div>
+
+      <ChangePage
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        hasNextPage={hasNextPage}
+      />
 
       {search.length === 0 && (
         <div className="w-full">
